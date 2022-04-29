@@ -4,7 +4,7 @@ import Link from "next/link";
 const Header = () => {
   return (
     <header className='absolute top-0 w-full'>
-      <div className='absolute w-full pt-8 px-6 sm:pt-[50px] lg:px-[166px] flex justify-between items-start z-20'>
+      <div className='absolute w-full pt-8 px-6 sm:pt-[50px] lg:px-[166px] flex justify-between items-ce z-20'>
         <img
           src='/logo.svg'
           alt=''
@@ -16,11 +16,11 @@ const Header = () => {
             alt=''
             className='h-[15px] w-[16px] text-white sm:hidden'
           />
-          <div className='space-x-[34px] hidden sm:inline-block text-white text-[13px] font-commissioner font-medium '>
+          <nav className='space-x-[34px] hidden sm:inline-block text-white text-[13px] font-commissioner font-medium '>
             <Link href='/'>About</Link>
             <Link href='/'>Discover</Link>
             <Link href='/'>Get Started</Link>
-          </div>
+          </nav>
         </div>
       </div>
       <div className='absolute h-[128px] w-full bg-gradient-to-b from-black to-transparent opacity-50' />
