@@ -1,13 +1,23 @@
 import React, { useState } from "react";
 import Head from "next/head";
-import Image from "next/image";
-import styles from "../styles/Home.module.css";
 import Header from "../components/Header";
 import FundingStatistics from "../components/FundingStatistics";
 import CrowdFundProject from "../components/CrowdFundProject";
 import About from "../components/About";
+import ModalDefault from "../components/ModalDefault";
 
 export default function Home() {
+  const [showModalDefault, setShowModalDefault] = useState(false);
+  const [showModalComplete, setShowModalComplete] = useState(false);
+
+  const modalExitClickHandler = () => {
+    setShowModalDefault(false);
+  };
+
+  const modalEnterClickHandler = () => {
+    setShowModalDefault(true);
+  };
+
   return (
     <React.Fragment>
       <Head>
@@ -22,11 +32,12 @@ export default function Home() {
         />
       </Head>
 
+      {showModalDefault && <ModalDefault onClick={modalExitClickHandler} />}
       <Header />
 
       <main className='absolute w-full font-commissioner pb-[76px] sm:pb-[124px]'>
         {/* Crowdfund Project */}
-        <CrowdFundProject />
+        <CrowdFundProject onClick={modalEnterClickHandler} />
 
         {/* Funding Statistics */}
         <FundingStatistics />

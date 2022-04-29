@@ -19,6 +19,9 @@ module.exports = {
       fontSize: {
         "3xl": "2rem",
       },
+      ringOffsetWidth: {
+        6: "6px",
+      },
     },
   },
   plugins: [],

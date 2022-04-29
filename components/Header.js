@@ -37,10 +37,16 @@ const Header = () => {
               onClick={menuOnClickHandler}
             />
           )}
-          <nav className='space-x-[34px] hidden sm:inline-block text-white text-[13px] font-commissioner font-medium '>
-            <Link href='/'>About</Link>
-            <Link href='/'>Discover</Link>
-            <Link href='/'>Get Started</Link>
+          <nav className='space-x-[34px] hidden sm:inline-block text-white text-[13px] font-commissioner font-medium'>
+            <Link href='/'>
+              <a className='hover:underline'>About</a>
+            </Link>
+            <Link href='/'>
+              <a className='hover:underline'>Discover</a>
+            </Link>
+            <Link href='/'>
+              <a className='hover:underline'>Get Started</a>
+            </Link>
           </nav>
         </div>
       </div>

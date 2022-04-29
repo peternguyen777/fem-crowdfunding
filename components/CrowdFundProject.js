@@ -1,6 +1,6 @@
 import React from "react";
 
-const CrowdFundProject = () => {
+const CrowdFundProject = (props) => {
   return (
     <React.Fragment>
       <div className='mt-[244px] sm:mt-[308px] border border-gray-200 bg-white rounded-lg mx-6 px-6 sm:mx-auto sm:max-w-[730px] pt-[52px] pb-10 text-center'>
@@ -12,7 +12,10 @@ const CrowdFundProject = () => {
         </p>
         <div className='flex justify-between items-center'>
           {/* Back this project */}
-          <button className='bg-button-nonselect hover:bg-button-select px-[42px] h-14 rounded-full text-base text-white font-medium'>
+          <button
+            onClick={props.onClick}
+            className='bg-button-nonselect hover:bg-button-select px-[42px] h-14 rounded-full text-base text-white font-medium'
+          >
             Back this project
           </button>
           <div className='flex items-center bg-gray-100 rounded-full'>
