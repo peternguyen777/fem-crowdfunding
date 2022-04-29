@@ -38,7 +38,6 @@ const ModalDefault = (props) => {
                       type='radio'
                       id={item.id}
                       name={item.name}
-                      name='Pledge Amount'
                       className='inline-block ml-1.5 mr-6 w-3 h-3 appearance-none rounded-full ring-1 ring-offset-6 ring-gray-300 checked:bg-button-nonselect'
                     ></input>
                     <div className='inline-block '>
