@@ -24,7 +24,7 @@ export default function Home() {
 
       <Header />
 
-      <main className='absolute w-full font-commissioner'>
+      <main className='absolute w-full font-commissioner pb-[76px] sm:pb-[124px]'>
         {/* Crowdfund Project */}
         <CrowdFundProject />
 
