@@ -1,4 +1,5 @@
 import React from "react";
+import Link from "next/link";
 
 const Header = () => {
   return (
@@ -16,9 +17,9 @@ const Header = () => {
             className='h-[15px] w-[16px] text-white sm:hidden'
           />
           <div className='space-x-[34px] hidden sm:inline-block text-white text-[13px] font-commissioner font-medium '>
-            <a href='/'>About</a>
-            <a href='/'>Discover</a>
-            <a href='/'>Get Started</a>
+            <Link href='/'>About</Link>
+            <Link href='/'>Discover</Link>
+            <Link href='/'>Get Started</Link>
           </div>
         </div>
       </div>

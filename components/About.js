@@ -3,6 +3,7 @@ import React from "react";
 const About = () => {
   const rewards = [
     {
+      id: 0,
       name: "Bamboo Stand",
       pledge: 25,
       description:
@@ -10,6 +11,7 @@ const About = () => {
       remaining: 101,
     },
     {
+      id: 1,
       name: "Black Edition Stand",
       pledge: 100,
       description:
@@ -17,6 +19,7 @@ const About = () => {
       remaining: 64,
     },
     {
+      id: 2,
       name: "Mahogany Special Edition",
       pledge: 200,
       description:
@@ -48,6 +51,7 @@ const About = () => {
               className={`border border-gray-200 rounded-lg p-6 mb-0 ${
                 item.remaining === 0 ? "opacity-50" : "opacity-100"
               }`}
+              key={item.id}
             >
               <div className='mb-6 sm:flex sm:flex-row sm:justify-between sm:items-start'>
                 <h4 className='text-sm font-bold mb-2 sm:mb-0'>{item.name}</h4>
