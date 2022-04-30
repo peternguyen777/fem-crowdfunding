@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import rewards from "./rewards";
 
 const ModalDefault = (props) => {
@@ -18,6 +18,10 @@ const ModalDefault = (props) => {
     setCurrentSelection(event.target.value);
   };
 
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
   return (
     <React.Fragment>
       <div className='absolute w-full z-40'>
@@ -35,7 +39,7 @@ const ModalDefault = (props) => {
             Want to support us in bringing Mastercraft Bamboo Monitor Riser out
             in the world?
           </p>
-          <div className='space-y-6' onChange={selectionValue}>
+          <div className='space-y-6'>
             {allRewards.map((item) => {
               return (
                 <div
@@ -55,6 +59,7 @@ const ModalDefault = (props) => {
                         name='pledge'
                         disabled={item.remaining == 0 ? true : false}
                         value={item.id}
+                        onChange={selectionValue}
                         className='inline-block ml-1.5 mr-6 w-3 h-3 appearance-none rounded-full ring-1 ring-offset-6 ring-gray-300 checked:bg-button-nonselect'
                       ></input>
                       <div className='inline-block sm:flex '>

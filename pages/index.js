@@ -43,7 +43,7 @@ export default function Home() {
         <FundingStatistics />
 
         {/* About */}
-        <About />
+        <About onClick={modalEnterClickHandler} />
       </main>
     </React.Fragment>
   );

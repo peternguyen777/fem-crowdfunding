@@ -15,7 +15,7 @@ const Header = () => {
 
   return (
     <header className='absolute top-0 w-full'>
-      <div className='absolute w-full pt-8 px-6 sm:pt-[50px] lg:px-[166px] flex justify-between items-center z-20'>
+      <div className='absolute w-full pt-8 px-6 sm:pt-[50px] md:px-[166px] flex justify-between items-center z-20'>
         <img
           src='/logo.svg'
           alt=''

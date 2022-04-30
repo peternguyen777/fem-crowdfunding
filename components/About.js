@@ -1,34 +1,7 @@
 import React from "react";
 import rewards from "./rewards";
 
-const About = () => {
-  // const rewards = [
-  //   {
-  //     id: 0,
-  //     name: "Bamboo Stand",
-  //     pledge: 25,
-  //     description:
-  //       "You get an ergonomic stand made of natural bamboo. You've helped us launch our promotional campaign, and you’ll be added to a special Backer member list.",
-  //     remaining: 101,
-  //   },
-  //   {
-  //     id: 1,
-  //     name: "Black Edition Stand",
-  //     pledge: 100,
-  //     description:
-  //       "You get a Black Special Edition computer stand and a personal thank you. You’ll be added to our Backer member list. Shipping is included.",
-  //     remaining: 64,
-  //   },
-  //   {
-  //     id: 2,
-  //     name: "Mahogany Special Edition",
-  //     pledge: 200,
-  //     description:
-  //       "You get two Special Edition Mahogany stands, a Backer T-Shirt, and a personal thank you. You’ll be added to our Backer member list. Shipping is included. ",
-  //     remaining: 0,
-  //   },
-  // ];
-
+const About = (props) => {
   return (
     <div className='bg-white border border-gray-200 mx-6 px-6 sm:mx-auto sm:max-w-[730px] rounded-lg mt-6 pt-8 pb-10 sm:pb-12 '>
       <div className='mb-9'>
@@ -74,6 +47,8 @@ const About = () => {
                   className={`bg-button-nonselect ${
                     item.remaining > 0 && "hover:bg-button-select"
                   } px-8 h-12 rounded-full text-base text-white font-medium`}
+                  onClick={props.onClick}
+                  disabled={item.remaining === 0 ? true : false}
                 >
                   {item.remaining === 0 ? "Out of Stock" : "Select Reward"}
                 </button>
