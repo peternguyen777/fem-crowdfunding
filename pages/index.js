@@ -32,10 +32,10 @@ export default function Home() {
         />
       </Head>
 
-      {showModalDefault && <ModalDefault onClick={modalExitClickHandler} />}
       <Header />
 
       <main className='absolute w-full font-commissioner pb-[76px] sm:pb-[124px]'>
+        {showModalDefault && <ModalDefault onClick={modalExitClickHandler} />}
         {/* Crowdfund Project */}
         <CrowdFundProject onClick={modalEnterClickHandler} />
 

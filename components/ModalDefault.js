@@ -18,8 +18,6 @@ const ModalDefault = (props) => {
     setCurrentSelection(event.target.value);
   };
 
-  console.log(currentSelection);
-
   return (
     <React.Fragment>
       <div className='absolute w-full z-40'>
@@ -44,6 +42,8 @@ const ModalDefault = (props) => {
                   className={`p-6 border ${
                     currentSelection == item.id &&
                     "border-button-nonselect border-2"
+                  } ${
+                    item.remaining === 0 ? "opacity-50" : "opacity-100"
                   } rounded-lg`}
                   key={item.id}
                 >
@@ -53,6 +53,7 @@ const ModalDefault = (props) => {
                         type='radio'
                         id={item.id}
                         name='pledge'
+                        disabled={item.remaining == 0 ? true : false}
                         value={item.id}
                         className='inline-block ml-1.5 mr-6 w-3 h-3 appearance-none rounded-full ring-1 ring-offset-6 ring-gray-300 checked:bg-button-nonselect'
                       ></input>
@@ -123,7 +124,7 @@ const ModalDefault = (props) => {
       </div>
 
       <div
-        className='absolute w-full h-screen bg-black opacity-50 z-30'
+        className='absolute w-full h-full bg-black opacity-50 z-30'
         onClick={props.onClick}
       />
     </React.Fragment>
