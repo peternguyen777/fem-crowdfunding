@@ -18,6 +18,8 @@ const ModalDefault = (props) => {
     setCurrentSelection(event.target.value);
   };
 
+  console.log(currentSelection);
+
   return (
     <React.Fragment>
       <div className='absolute w-full z-40'>
@@ -38,7 +40,13 @@ const ModalDefault = (props) => {
           <div className='space-y-6' onChange={selectionValue}>
             {allRewards.map((item) => {
               return (
-                <div className='p-6 border rounded-lg' key={item.id}>
+                <div
+                  className={`p-6 border ${
+                    currentSelection == item.id &&
+                    "border-button-nonselect border-2"
+                  } rounded-lg`}
+                  key={item.id}
+                >
                   <div className='flex mb-6 justify-between items-start'>
                     <div className='flex flex-row items-center'>
                       <input
@@ -59,48 +67,54 @@ const ModalDefault = (props) => {
                         )}
                       </div>
                     </div>
-                    <h1 className='font-bold hidden sm:inline-block'>
-                      {item.remaining}
-                      <span className='font-normal text-p-color'> left</span>
-                    </h1>
-                  </div>
-                  <p className='text-sm text-p-color font-normal mb-6'>
-                    {item.description}
-                  </p>
-                  {item.remaining >= 0 && (
-                    <div>
-                      <h1 className='font-bold mb-6 sm:hidden'>
+                    {item.remaining >= 0 && (
+                      <h1 className='font-bold hidden sm:inline-block'>
                         {item.remaining}
                         <span className='font-normal text-p-color'> left</span>
                       </h1>
-                      <hr className='mx-0 mb-6' />
-                      <div className='sm:flex sm:items-center sm:justify-between'>
-                        <p className='text-sm text-p-color font-normal mb-6 text-center sm:mb-0'>
-                          Enter your pledge
-                        </p>
-                        <form
-                          action=''
-                          className='flex justify-between items-center sm:justify-end sm:space-x-4'
-                        >
-                          <label
-                            htmlFor='pledge'
-                            className='absolute font-bold text-sm text-gray-400 translate-x-6 sm:-translate-x-[200px]'
+                    )}
+                  </div>
+                  <p className='text-sm text-p-color font-normal'>
+                    {item.description}
+                  </p>
+                  <div>
+                    {item.remaining >= 0 && (
+                      <h1 className='font-bold mt-6 sm:hidden'>
+                        {item.remaining}
+                        <span className='font-normal text-p-color'> left</span>
+                      </h1>
+                    )}
+                    {currentSelection == item.id && (
+                      <>
+                        <hr className='mx-0 my-6' />
+                        <div className='sm:flex sm:items-center sm:justify-between'>
+                          <p className='text-sm text-p-color font-normal mb-6 text-center sm:mb-0'>
+                            Enter your pledge
+                          </p>
+                          <form
+                            action=''
+                            className='flex justify-between items-center sm:justify-end sm:space-x-4'
                           >
-                            $
-                          </label>
-                          <input
-                            name='pledge'
-                            type='number'
-                            placeholder={`${item.pledge || 0} `}
-                            className='w-[100px] h-[48px] pl-10 pr-4 rounded-full border outline-gray-300 font-bold text-sm appearance-none'
-                          />
-                          <button className='w-[115px] h-[48px] bg-button-nonselect cursor-pointer hover:bg-button-select rounded-full text-white font-bold text-sm'>
-                            Continue
-                          </button>
-                        </form>
-                      </div>
-                    </div>
-                  )}
+                            <label
+                              htmlFor='pledge'
+                              className='absolute font-bold text-sm text-gray-400 translate-x-6 sm:-translate-x-[200px]'
+                            >
+                              $
+                            </label>
+                            <input
+                              name='pledge'
+                              type='number'
+                              placeholder={`${item.pledge || 0} `}
+                              className='w-[100px] h-[48px] pl-10 pr-4 rounded-full border outline-gray-300 font-bold text-sm appearance-none'
+                            />
+                            <button className='w-[115px] h-[48px] bg-button-nonselect cursor-pointer hover:bg-button-select rounded-full text-white font-bold text-sm'>
+                              Continue
+                            </button>
+                          </form>
+                        </div>
+                      </>
+                    )}
+                  </div>
                 </div>
               );
             })}
