@@ -1,7 +1,9 @@
-import React from "react";
+import React, { useState } from "react";
 import rewards from "./rewards";
 
 const ModalDefault = (props) => {
+  const [currentSelection, setCurrentSelection] = useState(null);
+
   const allRewards = [
     {
       id: 9999,
@@ -11,6 +13,10 @@ const ModalDefault = (props) => {
     },
     ...rewards,
   ];
+
+  const selectionValue = (event) => {
+    setCurrentSelection(event.target.value);
+  };
 
   return (
     <React.Fragment>
@@ -29,36 +35,70 @@ const ModalDefault = (props) => {
             Want to support us in bringing Mastercraft Bamboo Monitor Riser out
             in the world?
           </p>
-          <div className='space-y-6'>
+          <div className='space-y-6' onChange={selectionValue}>
             {allRewards.map((item) => {
               return (
-                <div className='p-6 pb-8 border rounded-lg' key={item.id}>
-                  <div className='flex flex-row items-center mb-6'>
-                    <input
-                      type='radio'
-                      id={item.id}
-                      name={item.name}
-                      className='inline-block ml-1.5 mr-6 w-3 h-3 appearance-none rounded-full ring-1 ring-offset-6 ring-gray-300 checked:bg-button-nonselect'
-                    ></input>
-                    <div className='inline-block '>
-                      <h4 className='text-sm font-bold'>{item.name}</h4>
-                      {item.pledge && (
-                        <h5 className='text-button-nonselect font-medium text-sm'>
-                          Pledge ${item.pledge} reward
-                        </h5>
-                      )}
+                <div className='p-6 border rounded-lg' key={item.id}>
+                  <div className='flex mb-6 justify-between items-start'>
+                    <div className='flex flex-row items-center'>
+                      <input
+                        type='radio'
+                        id={item.id}
+                        name='pledge'
+                        value={item.id}
+                        className='inline-block ml-1.5 mr-6 w-3 h-3 appearance-none rounded-full ring-1 ring-offset-6 ring-gray-300 checked:bg-button-nonselect'
+                      ></input>
+                      <div className='inline-block sm:flex '>
+                        <h4 className='text-sm font-bold sm:mr-4'>
+                          {item.name}
+                        </h4>
+                        {item.pledge && (
+                          <h5 className='text-button-nonselect font-medium text-sm'>
+                            Pledge ${item.pledge} reward
+                          </h5>
+                        )}
+                      </div>
                     </div>
+                    <h1 className='font-bold hidden sm:inline-block'>
+                      {item.remaining}
+                      <span className='font-normal text-p-color'> left</span>
+                    </h1>
                   </div>
                   <p className='text-sm text-p-color font-normal mb-6'>
                     {item.description}
                   </p>
                   {item.remaining >= 0 && (
                     <div>
-                      <h1 className='font-bold mb-6'>
+                      <h1 className='font-bold mb-6 sm:hidden'>
                         {item.remaining}
                         <span className='font-normal text-p-color'> left</span>
                       </h1>
-                      <hr className='mx-0' />
+                      <hr className='mx-0 mb-6' />
+                      <div className='sm:flex sm:items-center sm:justify-between'>
+                        <p className='text-sm text-p-color font-normal mb-6 text-center sm:mb-0'>
+                          Enter your pledge
+                        </p>
+                        <form
+                          action=''
+                          className='flex justify-between items-center sm:justify-end sm:space-x-4'
+                        >
+                          <label
+                            htmlFor='pledge'
+                            className='absolute font-bold text-sm text-gray-400 translate-x-6 sm:-translate-x-[200px]'
+                          >
+                            $
+                          </label>
+                          <input
+                            name='pledge'
+                            type='number'
+                            placeholder={`${item.pledge || 0} `}
+                            className='w-[100px] h-[48px] pl-10 pr-4 rounded-full border outline-gray-300 font-bold text-sm appearance-none'
+                          />
+                          <button className='w-[115px] h-[48px] bg-button-nonselect cursor-pointer hover:bg-button-select rounded-full text-white font-bold text-sm'>
+                            Continue
+                          </button>
+                        </form>
+                      </div>
                     </div>
                   )}
                 </div>
