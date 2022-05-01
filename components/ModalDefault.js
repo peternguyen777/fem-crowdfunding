@@ -2,8 +2,6 @@ import React, { useState, useEffect } from "react";
 import rewards from "./rewards";
 
 const ModalDefault = (props) => {
-  const [currentSelection, setCurrentSelection] = useState(null);
-
   const allRewards = [
     {
       id: 9999,
@@ -13,10 +11,6 @@ const ModalDefault = (props) => {
     },
     ...rewards,
   ];
-
-  const selectionValue = (event) => {
-    setCurrentSelection(event.target.value);
-  };
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -44,7 +38,7 @@ const ModalDefault = (props) => {
               return (
                 <div
                   className={`p-6 border ${
-                    currentSelection == item.id &&
+                    props.indexSelection == item.id &&
                     "border-button-nonselect border-2"
                   } ${
                     item.remaining === 0 ? "opacity-50" : "opacity-100"
@@ -58,8 +52,9 @@ const ModalDefault = (props) => {
                         id={item.id}
                         name='pledge'
                         disabled={item.remaining == 0 ? true : false}
+                        checked={item.id == props.indexSelection ? true : false}
                         value={item.id}
-                        onChange={selectionValue}
+                        onChange={props.modalSelection}
                         className='inline-block ml-1.5 mr-6 w-3 h-3 appearance-none rounded-full ring-1 ring-offset-6 ring-gray-300 checked:bg-button-nonselect'
                       ></input>
                       <div className='inline-block sm:flex '>
@@ -90,7 +85,7 @@ const ModalDefault = (props) => {
                         <span className='font-normal text-p-color'> left</span>
                       </h1>
                     )}
-                    {currentSelection == item.id && (
+                    {props.indexSelection == item.id && (
                       <>
                         <hr className='mx-0 my-6' />
                         <div className='sm:flex sm:items-center sm:justify-between'>

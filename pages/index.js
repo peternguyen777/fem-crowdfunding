@@ -8,7 +8,8 @@ import ModalDefault from "../components/ModalDefault";
 
 export default function Home() {
   const [showModalDefault, setShowModalDefault] = useState(false);
-  const [showModalComplete, setShowModalComplete] = useState(false);
+  const [currentSelection, setCurrentSelection] = useState(null);
+  // const [showModalComplete, setShowModalComplete] = useState(false);
 
   const modalExitClickHandler = () => {
     setShowModalDefault(false);
@@ -16,6 +17,18 @@ export default function Home() {
 
   const modalEnterClickHandler = () => {
     setShowModalDefault(true);
+    setCurrentSelection(null);
+  };
+
+  //open modal & pre-select reward
+  const modalPreselectClickHandler = (event) => {
+    event.preventDefault();
+    setShowModalDefault(true);
+    setCurrentSelection(event.target.value);
+  };
+
+  const radioSelectClickHandler = (event) => {
+    setCurrentSelection(event.target.value);
   };
 
   return (
@@ -35,7 +48,13 @@ export default function Home() {
       <Header />
 
       <main className='absolute w-full font-commissioner pb-[76px] sm:pb-[124px]'>
-        {showModalDefault && <ModalDefault onClick={modalExitClickHandler} />}
+        {showModalDefault && (
+          <ModalDefault
+            onClick={modalExitClickHandler}
+            indexSelection={currentSelection}
+            modalSelection={radioSelectClickHandler}
+          />
+        )}
         {/* Crowdfund Project */}
         <CrowdFundProject onClick={modalEnterClickHandler} />
 
@@ -43,7 +62,7 @@ export default function Home() {
         <FundingStatistics />
 
         {/* About */}
-        <About onClick={modalEnterClickHandler} />
+        <About onClick={modalPreselectClickHandler} />
       </main>
     </React.Fragment>
   );

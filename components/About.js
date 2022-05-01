@@ -49,6 +49,7 @@ const About = (props) => {
                   } px-8 h-12 rounded-full text-base text-white font-medium`}
                   onClick={props.onClick}
                   disabled={item.remaining === 0 ? true : false}
+                  value={item.id}
                 >
                   {item.remaining === 0 ? "Out of Stock" : "Select Reward"}
                 </button>
