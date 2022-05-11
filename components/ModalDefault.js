@@ -1,5 +1,4 @@
-import React, { useState, useEffect } from "react";
-import rewards from "./rewards";
+import React, { useEffect } from "react";
 
 const ModalDefault = (props) => {
   const allRewards = [
@@ -9,8 +8,10 @@ const ModalDefault = (props) => {
       description:
         "Choose to support us without a reward if you simply believe in our project. As a backer, you will be signed up to receive product updates via email.",
     },
-    ...rewards,
+    ...props.rewards,
   ];
+
+  console.log(allRewards);
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -18,18 +19,18 @@ const ModalDefault = (props) => {
 
   return (
     <React.Fragment>
-      <div className='absolute w-full z-40'>
-        <div className='mt-[120px] z-40 bg-white mx-6 p-6 sm:mx-auto max-w-[730px] rounded-lg font-commissioner'>
-          <div className='flex flex-row justify-between items-center'>
-            <h3 className='font-bold text-lg '>Back this project</h3>
+      <div className='absolute z-40 w-full'>
+        <div className='z-40 mx-6 mt-[120px] max-w-[730px] rounded-lg bg-white p-6 font-commissioner sm:mx-auto'>
+          <div className='flex flex-row items-center justify-between'>
+            <h3 className='text-lg font-bold '>Back this project</h3>
             <img
               src='/icon-close-modal.svg'
               alt=''
-              className='h-[15px] w-[15px]'
+              className='h-[15px] w-[15px] cursor-pointer '
               onClick={props.onClick}
             />
           </div>
-          <p className='text-sm text-p-color font-normal mb-6'>
+          <p className='mb-6 text-sm font-normal text-p-color'>
             Want to support us in bringing Mastercraft Bamboo Monitor Riser out
             in the world?
           </p>
@@ -37,15 +38,15 @@ const ModalDefault = (props) => {
             {allRewards.map((item) => {
               return (
                 <div
-                  className={`p-6 border ${
+                  className={`border p-6 ${
                     props.indexSelection == item.id &&
-                    "border-button-nonselect border-2"
+                    "border-2 border-button-nonselect"
                   } ${
                     item.remaining === 0 ? "opacity-50" : "opacity-100"
                   } rounded-lg`}
                   key={item.id}
                 >
-                  <div className='flex mb-6 justify-between items-start'>
+                  <div className='mb-6 flex items-start justify-between'>
                     <div className='flex flex-row items-center'>
                       <input
                         type='radio'
@@ -55,32 +56,32 @@ const ModalDefault = (props) => {
                         checked={item.id == props.indexSelection ? true : false}
                         value={item.id}
                         onChange={props.modalSelection}
-                        className='inline-block ml-1.5 mr-6 w-3 h-3 appearance-none rounded-full ring-1 ring-offset-6 ring-gray-300 checked:bg-button-nonselect'
+                        className='ml-1.5 mr-6 inline-block h-3 w-3 appearance-none rounded-full ring-1 ring-gray-300 ring-offset-6 checked:bg-button-nonselect'
                       ></input>
                       <div className='inline-block sm:flex '>
                         <h4 className='text-sm font-bold sm:mr-4'>
                           {item.name}
                         </h4>
                         {item.pledge && (
-                          <h5 className='text-button-nonselect font-medium text-sm'>
+                          <h5 className='text-sm font-medium text-button-nonselect'>
                             Pledge ${item.pledge} reward
                           </h5>
                         )}
                       </div>
                     </div>
                     {item.remaining >= 0 && (
-                      <h1 className='font-bold hidden sm:inline-block'>
+                      <h1 className='hidden font-bold sm:inline-block'>
                         {item.remaining}
                         <span className='font-normal text-p-color'> left</span>
                       </h1>
                     )}
                   </div>
-                  <p className='text-sm text-p-color font-normal'>
+                  <p className='text-sm font-normal text-p-color'>
                     {item.description}
                   </p>
                   <div>
                     {item.remaining >= 0 && (
-                      <h1 className='font-bold mt-6 sm:hidden'>
+                      <h1 className='mt-6 font-bold sm:hidden'>
                         {item.remaining}
                         <span className='font-normal text-p-color'> left</span>
                       </h1>
@@ -89,16 +90,17 @@ const ModalDefault = (props) => {
                       <>
                         <hr className='mx-0 my-6' />
                         <div className='sm:flex sm:items-center sm:justify-between'>
-                          <p className='text-sm text-p-color font-normal mb-6 text-center sm:mb-0'>
+                          <p className='mb-6 text-center text-sm font-normal text-p-color sm:mb-0'>
                             Enter your pledge
                           </p>
                           <form
-                            action=''
-                            className='flex justify-between items-center sm:justify-end sm:space-x-4'
+                            className='flex items-center justify-between sm:justify-end sm:space-x-4'
+                            onSubmit={props.submitPledge}
+                            id={item.id}
                           >
                             <label
                               htmlFor='pledge'
-                              className='absolute font-bold text-sm text-gray-400 translate-x-6 sm:-translate-x-[200px]'
+                              className='absolute translate-x-6 text-sm font-bold text-gray-400 sm:-translate-x-[200px]'
                             >
                               $
                             </label>
@@ -106,9 +108,10 @@ const ModalDefault = (props) => {
                               name='pledge'
                               type='number'
                               placeholder={`${item.pledge || 0} `}
-                              className='w-[100px] h-[48px] pl-10 pr-4 rounded-full border outline-gray-300 font-bold text-sm appearance-none'
+                              onChange={props.enterPledge}
+                              className='h-[48px] w-[100px] appearance-none rounded-full border pl-10 pr-4 text-sm font-bold outline-gray-300'
                             />
-                            <button className='w-[115px] h-[48px] bg-button-nonselect cursor-pointer hover:bg-button-select rounded-full text-white font-bold text-sm'>
+                            <button className='h-[48px] w-[115px] cursor-pointer rounded-full bg-button-nonselect text-sm font-bold text-white hover:bg-button-select'>
                               Continue
                             </button>
                           </form>
@@ -124,7 +127,7 @@ const ModalDefault = (props) => {
       </div>
 
       <div
-        className='absolute w-full h-full bg-black opacity-50 z-30'
+        className='absolute z-30 h-full w-full bg-black opacity-50'
         onClick={props.onClick}
       />
     </React.Fragment>

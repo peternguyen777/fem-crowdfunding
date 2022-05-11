@@ -1,34 +1,74 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import Head from "next/head";
 import Header from "../components/Header";
 import FundingStatistics from "../components/FundingStatistics";
 import CrowdFundProject from "../components/CrowdFundProject";
 import About from "../components/About";
 import ModalDefault from "../components/ModalDefault";
+import ModalComplete from "../components/ModalComplete";
+import rewards from "../components/rewards";
 
 export default function Home() {
+  const [rewardsList, setRewardsList] = useState(rewards); //import rewards as default
   const [showModalDefault, setShowModalDefault] = useState(false);
   const [currentSelection, setCurrentSelection] = useState(null);
-  // const [showModalComplete, setShowModalComplete] = useState(false);
+  const [showModalComplete, setShowModalComplete] = useState(false);
+  const [enteredAmount, setEnteredAmount] = useState(0);
+  const [statistics, setStatistics] = useState({
+    funding: 89914,
+    total: 100000,
+    backers: 5007,
+    daysLeft: 56,
+  });
 
-  const modalExitClickHandler = () => {
-    setShowModalDefault(false);
-  };
-
+  //open modal from "back this project button"
   const modalEnterClickHandler = () => {
     setShowModalDefault(true);
     setCurrentSelection(null);
   };
 
-  //open modal & pre-select reward
+  //within modal, manually select reward
+  const radioSelectClickHandler = (event) => {
+    setCurrentSelection(event.target.value);
+  };
+
+  //from home page, open modal & pre-select reward
   const modalPreselectClickHandler = (event) => {
     event.preventDefault();
     setShowModalDefault(true);
     setCurrentSelection(event.target.value);
   };
 
-  const radioSelectClickHandler = (event) => {
-    setCurrentSelection(event.target.value);
+  //close modal
+  const modalExitClickHandler = () => {
+    setShowModalDefault(false);
+    setShowModalComplete(false);
+  };
+
+  //enter pledge
+  const enterPledgeHandler = (event) => {
+    setEnteredAmount(event.target.valueAsNumber);
+  };
+
+  //submit pledge
+  const submitPledgeHandler = (event) => {
+    event.preventDefault();
+
+    setStatistics({
+      ...statistics,
+      funding: statistics["funding"] + enteredAmount,
+      backers: statistics["backers"] + 1,
+    });
+
+    for (let i = 0; i < rewards.length; i++) {
+      if (i == event.target.id) {
+        rewards[i]["remaining"]--;
+      }
+    }
+
+    setEnteredAmount(0);
+    setShowModalDefault(false);
+    setShowModalComplete(true);
   };
 
   return (
@@ -47,19 +87,23 @@ export default function Home() {
 
       <Header />
 
-      <main className='absolute w-full font-commissioner pb-[76px] sm:pb-[124px]'>
+      <main className='absolute w-full pb-[76px] font-commissioner sm:pb-[124px]'>
         {showModalDefault && (
           <ModalDefault
             onClick={modalExitClickHandler}
             indexSelection={currentSelection}
             modalSelection={radioSelectClickHandler}
+            submitPledge={submitPledgeHandler}
+            enterPledge={enterPledgeHandler}
+            rewards={rewards}
           />
         )}
+        {showModalComplete && <ModalComplete onClick={modalExitClickHandler} />}
         {/* Crowdfund Project */}
         <CrowdFundProject onClick={modalEnterClickHandler} />
 
         {/* Funding Statistics */}
-        <FundingStatistics />
+        <FundingStatistics statistics={statistics} />
 
         {/* About */}
         <About onClick={modalPreselectClickHandler} />

@@ -1,43 +1,53 @@
-import React from "react";
+import React, { useState } from "react";
 
 const CrowdFundProject = (props) => {
+  const [bookmarked, setBookmarked] = useState(false);
+
+  const bookmarkClickHandler = () => {
+    setBookmarked(!bookmarked);
+  };
+
   return (
     <React.Fragment>
-      <div className='mt-[244px] sm:mt-[308px] border border-gray-200 bg-white rounded-lg mx-6 px-6 sm:mx-auto sm:max-w-[730px] pt-[52px] pb-10 text-center'>
+      <div className='mx-6 mt-[244px] rounded-lg border border-gray-200 bg-white px-6 pt-[52px] pb-10 text-center sm:mx-auto sm:mt-[308px] sm:max-w-[730px]'>
         <h2 className='mb-4 text-xl font-bold'>
           Mastercraft Bamboo Monitor Riser
         </h2>
         <p className='mb-6 text-sm font-normal text-p-color'>
           A beautifully handcrafted monitor stand to reduce neck and eye strain
         </p>
-        <div className='flex justify-between items-center'>
+        <div className='flex items-center justify-between'>
           {/* Back this project */}
           <button
             onClick={props.onClick}
-            className='bg-button-nonselect hover:bg-button-select px-[42px] h-14 rounded-full text-base text-white font-medium'
+            className='h-14 rounded-full bg-button-nonselect px-[42px] text-base font-medium text-white hover:bg-button-select'
           >
             Back this project
           </button>
-          <div className='flex items-center bg-gray-100 rounded-full'>
-            {/* <img src='/icon-bookmark.svg' alt='' /> */}
+          <div className='flex items-center rounded-full bg-gray-100'>
             <svg
               width='56'
               height='56'
               xmlns='http://www.w3.org/2000/svg'
-              className='fill-[#2F2F2F] hover:fill-[#707070] cursor-pointer'
+              className={`cursor-pointer ${
+                bookmarked
+                  ? "fill-[#2F2F2F] hover:fill-[#707070]"
+                  : "fill-[#707070] hover:fill-[#2F2F2F]"
+              } `}
+              onClick={bookmarkClickHandler}
             >
               <g>
                 <circle cx='28' cy='28' r='28' />
                 <path fill='#B1B1B1' d='M23 19v18l5-5.058L33 37V19z' />
               </g>
             </svg>
-            <div className='hidden sm:inline-block pl-4 pr-6 text-p-color text-base font-medium'>
+            <div className='hidden pl-4 pr-6 text-base font-medium text-p-color sm:inline-block'>
               Bookmark
             </div>
           </div>
         </div>
       </div>
-      <div className='absolute top-[244px] sm:top-[308px] w-full  text-center -translate-y-1/2 z-10'>
+      <div className='absolute top-[244px] z-10 w-full  -translate-y-1/2 text-center sm:top-[308px]'>
         <img src='/logo-mastercraft.svg' alt='' className='mx-auto' />
       </div>
     </React.Fragment>

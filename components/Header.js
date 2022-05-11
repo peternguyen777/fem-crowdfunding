@@ -15,7 +15,7 @@ const Header = () => {
 
   return (
     <header className='absolute top-0 w-full'>
-      <div className='absolute w-full pt-8 px-6 sm:pt-[50px] md:px-[166px] flex justify-between items-center z-20'>
+      <div className='absolute z-20 flex w-full items-center justify-between px-6 pt-8 sm:pt-[50px] md:px-[166px]'>
         <img
           src='/logo.svg'
           alt=''
@@ -26,7 +26,7 @@ const Header = () => {
             <img
               src='/icon-close-menu.svg'
               alt=''
-              className='w-[15px] h-[15px] sm:hidden'
+              className='h-[15px] w-[15px] sm:hidden'
               onClick={menuOffClickHandler}
             />
           ) : (
@@ -37,7 +37,7 @@ const Header = () => {
               onClick={menuOnClickHandler}
             />
           )}
-          <nav className='space-x-[34px] hidden sm:inline-block text-white text-[13px] font-commissioner font-medium'>
+          <nav className='hidden space-x-[34px] font-commissioner text-[13px] font-medium text-white sm:inline-block'>
             <Link href='/'>
               <a className='hover:underline'>About</a>
             </Link>
@@ -51,14 +51,14 @@ const Header = () => {
         </div>
       </div>
       {mobileMenu && (
-        <div className='absolute w-full top-[88px] sm:hidden'>
+        <div className='absolute top-[88px] w-full sm:hidden'>
           <MobileMenu />
         </div>
       )}
 
       {mobileMenu && (
         <div
-          className='absolute h-[667px] w-full bg-gradient-to-b from-black to-transparent opacity-60 z-10 sm:hidden'
+          className='absolute z-10 h-[667px] w-full bg-gradient-to-b from-black to-transparent opacity-60 sm:hidden'
           onClick={menuOffClickHandler}
         />
       )}
@@ -66,12 +66,12 @@ const Header = () => {
       <img
         src='/image-hero-mobile.jpg'
         alt=''
-        className='object-cover h-[300px] w-full sm:hidden'
+        className='h-[300px] w-full object-cover sm:hidden'
       />
       <img
         src='/image-hero-desktop.jpg'
         alt=''
-        className='object-cover h-[400px] w-full hidden sm:inline-block'
+        className='hidden h-[400px] w-full object-cover sm:inline-block'
       />
     </header>
   );

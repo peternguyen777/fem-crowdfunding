@@ -3,8 +3,8 @@ import Link from "next/link";
 
 const MobileMenu = () => {
   return (
-    <div className='absolute w-full z-20'>
-      <nav className='mx-6 py-6 top-[88px] border border-gray-200 rounded-lg bg-white z-20 text-lg leading-[22px] flex flex-col font-commissioner font-medium'>
+    <div className='absolute z-20 w-full'>
+      <nav className='top-[88px] z-20 mx-6 flex flex-col rounded-lg border border-gray-200 bg-white py-6 font-commissioner text-lg font-medium leading-[22px]'>
         <Link href='/'>
           <a className='px-5'>About</a>
         </Link>
