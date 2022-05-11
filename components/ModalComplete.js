@@ -1,6 +1,10 @@
 import React from "react";
 
 const ModalComplete = (props) => {
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
   return (
     <React.Fragment>
       <div className='absolute z-40 w-full'>
