@@ -9,7 +9,6 @@ import ModalComplete from "../components/ModalComplete";
 import rewards from "../components/rewards";
 
 export default function Home() {
-  const [rewardsList, setRewardsList] = useState(rewards); //import rewards as default
   const [showModalDefault, setShowModalDefault] = useState(false);
   const [currentSelection, setCurrentSelection] = useState(null);
   const [showModalComplete, setShowModalComplete] = useState(false);
@@ -29,6 +28,7 @@ export default function Home() {
 
   //within modal, manually select reward
   const radioSelectClickHandler = (event) => {
+    console.log(event.target.value);
     setCurrentSelection(event.target.value);
   };
 

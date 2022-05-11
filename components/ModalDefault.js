@@ -11,8 +11,6 @@ const ModalDefault = (props) => {
     ...props.rewards,
   ];
 
-  console.log(allRewards);
-
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
@@ -23,12 +21,15 @@ const ModalDefault = (props) => {
         <div className='z-40 mx-6 mt-[120px] max-w-[730px] rounded-lg bg-white p-6 font-commissioner sm:mx-auto'>
           <div className='flex flex-row items-center justify-between'>
             <h3 className='text-lg font-bold '>Back this project</h3>
-            <img
-              src='/icon-close-modal.svg'
-              alt=''
-              className='h-[15px] w-[15px] cursor-pointer '
+            <svg
+              width='15'
+              height='15'
+              xmlns='http://www.w3.org/2000/svg'
+              className='cursor-pointer fill-[#979797] hover:fill-black'
               onClick={props.onClick}
-            />
+            >
+              <path d='M11.314 0l2.828 2.828L9.9 7.071l4.243 4.243-2.828 2.828L7.07 9.9l-4.243 4.243L0 11.314 4.242 7.07 0 2.828 2.828 0l4.243 4.242L11.314 0z' />
+            </svg>
           </div>
           <p className='mb-6 text-sm font-normal text-p-color'>
             Want to support us in bringing Mastercraft Bamboo Monitor Riser out
@@ -56,12 +57,15 @@ const ModalDefault = (props) => {
                         checked={item.id == props.indexSelection ? true : false}
                         value={item.id}
                         onChange={props.modalSelection}
-                        className='ml-1.5 mr-6 inline-block h-3 w-3 appearance-none rounded-full ring-1 ring-gray-300 ring-offset-6 checked:bg-button-nonselect'
+                        className='ml-1.5 mr-6 inline-block h-3 w-3 cursor-pointer appearance-none rounded-full ring-1 ring-gray-300 ring-offset-6 checked:bg-button-nonselect'
                       ></input>
                       <div className='inline-block sm:flex '>
-                        <h4 className='text-sm font-bold sm:mr-4'>
+                        <label
+                          className='cursor-pointer text-sm font-bold hover:text-button-nonselect sm:mr-4'
+                          for={item.id}
+                        >
                           {item.name}
-                        </h4>
+                        </label>
                         {item.pledge && (
                           <h5 className='text-sm font-medium text-button-nonselect'>
                             Pledge ${item.pledge} reward
