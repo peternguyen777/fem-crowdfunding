@@ -111,6 +111,7 @@ const ModalDefault = (props) => {
                             <input
                               name='pledge'
                               type='number'
+                              min={item.pledge}
                               placeholder={`${item.pledge || 0} `}
                               onChange={props.enterPledge}
                               className='h-[48px] w-[100px] appearance-none rounded-full border pl-10 pr-4 text-sm font-bold outline-gray-300'
