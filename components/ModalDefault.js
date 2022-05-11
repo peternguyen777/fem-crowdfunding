@@ -62,7 +62,7 @@ const ModalDefault = (props) => {
                       <div className='inline-block sm:flex '>
                         <label
                           className='cursor-pointer text-sm font-bold hover:text-button-nonselect sm:mr-4'
-                          for={item.id}
+                          htmlFor={item.id}
                         >
                           {item.name}
                         </label>
